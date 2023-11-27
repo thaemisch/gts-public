@@ -1,0 +1,20 @@
+version: "3"
+networks:
+  gts-backend-net:
+    driver: bridge
+services:
+  db:
+    networks:
+      - gts-backend-net
+    image: thaemisch/gts-rethinkdb
+    command: /bin/bash -c "apt-get update && apt-get install -y netcat"
+    ports:
+      - 8080:8080
+    volumes:
+      - PATH_TO_SSL_CERTIFICATES:/gts_rethinkdb-ssl/
+    restart: always
+    healthcheck:
+      test: ["CMD", "nc", "-z", "0.0.0.0", "8080"]
+      interval: 5s
+      timeout: 10s
+      retries: 3
