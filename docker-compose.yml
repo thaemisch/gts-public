@@ -7,9 +7,4 @@ services:
     networks:
       - gts-backend-net
     image: thaemisch/gts-rethinkdb
-    command: /bin/bash -c "apt-get update && apt-get install -y netcat"
-    ports:
-      - 8080:8080
-    volumes:
-      - PATH_TO_SSL_CERTIFICATES:/gts_rethinkdb-ssl/
     restart: always
